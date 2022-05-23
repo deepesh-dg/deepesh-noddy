@@ -1,0 +1,34 @@
+# Linux
+.directory
+*~
+
+# OS X
+.DS_Store*
+Icon?
+._*
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Secrets
+env/
+
+# npm
+node_modules/
+logs/
+package-lock.json
+*.log
+*.gz
+npm-debug.log
+
+# Git
+.git/
+.gitignore
+
+# Docker Files
+.dockerignore
+Dockerfile
+docker-compose.yml
+docker-compose*
