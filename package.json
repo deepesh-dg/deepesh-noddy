@@ -1,6 +1,6 @@
 {
 	"name": "@deepeshgupta/noddy",
-	"version": "0.5.21",
+	"version": "0.5.3",
 	"description": "A nodejs framework on the top of express for making apis and web base software too. slowly evolving technology. Noddy is meant for those developers who wants to get rid of scratch code and want handled every side thing by software and just want to develop backend.",
 	"main": "dist/bin/www.js",
 	"types": "dist/index.d.ts",
