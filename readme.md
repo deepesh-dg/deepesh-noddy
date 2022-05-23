@@ -1,28 +1,81 @@
-create env folder
+# Noddy
 
-mongoDb.env
-    MONGO_INITDB_ROOT_USERNAME=${MONGO_ROOT_USER}
-    MONGO_INITDB_ROOT_PASSWORD=${MONGO_ROOT_PASSWORD}
+A nodejs framework on the top of express for making apis and web base software too. slowly evolving technology. Noddy is meant for those developers who wants to get rid of scratch code and want handled every side thing by software and just want to develop backend.
 
-caBackend.env
-    ME_CONFIG_MONGODB_SERVER=mongo
-    ME_CONFIG_MONGODB_PORT=27017
-    ME_CONFIG_MONGODB_ENABLE_ADMIN=true
-    ME_CONFIG_MONGODB_AUTH_DATABASE=admin
-    ME_CONFIG_MONGODB_AUTH_USERNAME=${MONGO_ROOT_USER}
-    ME_CONFIG_MONGODB_AUTH_PASSWORD=${MONGO_ROOT_PASSWORD}
-    ME_CONFIG_BASICAUTH_USERNAME=${MONGOEXPRESS_LOGIN}
-    ME_CONFIG_BASICAUTH_PASSWORD=${MONGOEXPRESS_PASSWORD}
-    MONGODB_AUTH_URL="mongodb://mongo:27017/cleantax"
-    NODE_ENV='development'
-    CLOUDINARY_CLOUD_NAME=''
-    CLOUDINARY_API_KEY=
-    CLOUDINARY_API_SECRET=''
-    PORT=3000
-    DEBUG='app:*'
-    APP_URL="http://localhost:4200"
+## To Run in Docker
 
-just run 
+Create a file in _./env/mongo.env_ and copy paste following :-
+
+```
+MONGO_INITDB_ROOT_USERNAME=${MONGO_ROOT_USER}
+MONGO_INITDB_ROOT_PASSWORD=${MONGO_ROOT_PASSWORD}
+```
+
+Create a file in ./env/noddy.env and copy paste following :-
+
+```
+# Mongo DB
+MONGODB_AUTH_URL="mongodb://mongo:27017/db_name"
+
+# Node Env
+NODE_ENV='development'
+PORT=5500
+TZ="Europe/London"
+
+# here you can setup your own environment variables
+
+# Server Env
+DEBUG='app:*,core:*,www:*,test:*'
+
+# Mail Config
+MAIL_SERVICE="Gmail"
+MAIL_NAME="Noddy"
+MAIL_EMAILID="mail@example.com"
+MAIL_USERNAME="mail@example.com"
+MAIL_PASSWORD="password"
+
+```
+
+Then simply run below command
+
+```node
 $ docker-compose up -d --build
+```
 
-and open http://localhost:${port} in your browser
+## To Run Locally
+
+Create _./.env_ at the root of your site and copy and paste following :-
+
+```
+# Mongo DB
+MONGODB_AUTH_URL="mongodb://mongo:27017/db_name"
+
+# Node Env
+NODE_ENV='development'
+PORT=5500
+TZ="Europe/London"
+
+# here you can setup your own environment variables
+
+# Server Env
+DEBUG='app:*,core:*,www:*,test:*'
+
+# Mail Config
+MAIL_SERVICE="Gmail"
+MAIL_NAME="Noddy"
+MAIL_EMAILID="mail@example.com"
+MAIL_USERNAME="mail@example.com"
+MAIL_PASSWORD="password"
+```
+
+Then simply run below command
+
+```node
+$ npm run dev
+```
+
+### Boom, You are good to go...
+
+## License
+
+[MIT](https://choosealicense.com/licenses/mit/)

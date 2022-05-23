@@ -6,7 +6,7 @@ services:
     ports:
       - "27017:27017"
     env_file:
-      - ./env/mongoDb.env
+      - ./env/mongo.env
     volumes:
       - noddy-data:/data/db
 
