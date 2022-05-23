@@ -1,10 +1,12 @@
 {
 	"name": "@deepeshgupta/noddy",
-	"version": "0.5.0",
+	"version": "0.5.21",
 	"description": "A nodejs framework on the top of express for making apis and web base software too. slowly evolving technology. Noddy is meant for those developers who wants to get rid of scratch code and want handled every side thing by software and just want to develop backend.",
 	"main": "dist/bin/www.js",
 	"types": "dist/index.d.ts",
-	"bin": "./bin/cli.js",
+	"bin": {
+		"multiply": "bin/cli.js"
+	},
 	"scripts": {
 		"clean": "rimraf dist/*",
 		"lint": "tslint -c tslint.json -p tsconfig.json --fix",
@@ -26,7 +28,7 @@
 		"@types/http-errors": "^1.8.2",
 		"@types/jest": "^27.5.1",
 		"@types/lodash": "^4.14.179",
-		"@types/node": "^17.0.33",
+		"@types/node": "^17.0.35",
 		"@types/nodemailer": "^6.4.4",
 		"@types/supertest": "^2.0.12",
 		"babel-jest": "^28.1.0",

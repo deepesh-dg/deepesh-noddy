@@ -1,9 +1,10 @@
-#!usr/bin/env node
+#! /usr/bin/env node
 
-const { execSync } = require("child_process");
+const childProcess = require("child_process");
+
 const runCommand = (command) => {
     try {
-        execSync(command, { stdio: "inherit" });
+        childProcess.execSync(command, { stdio: "inherit" });
     } catch (e) {
         console.log(`Failed to execute command ${command}`, e);
         return false;
@@ -11,8 +12,8 @@ const runCommand = (command) => {
     return true;
 };
 
-const repoName = process.args[2];
-const gitCheckoutCommand = `git cline --depth https://github.com/PrinceDeepu/deepesh-noddy ${repoName}`;
+const repoName = process.argv[2];
+const gitCheckoutCommand = `git clone https://github.com/PrinceDeepu/deepesh-noddy.git ${repoName}`;
 const installDepsCommand = `cd ${repoName} && npm install`;
 
 console.log(`Cloning the Repository with name ${repoName}`);
