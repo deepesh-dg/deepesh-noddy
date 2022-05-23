@@ -1,6 +1,7 @@
-# Noddy
+# Noddy Framework
 
 A nodejs framework on the top of express for making apis and web base software too. slowly evolving technology. Noddy is meant for those developers who wants to get rid of scratch code and want handled every side thing by software and just want to develop backend.
+
 
 ## Installation
 
@@ -83,6 +84,14 @@ $ npm run dev
 ```
 
 ### Boom, You are good to go...
+___
+
+![Deepesh Gupta](https://rewards.brave.com/vhq0pr1kd2jpv78gi1b802q8g330)
+---
+Developed By - _Deepesh Gupta_
+
+---
+
 
 ## License
 
