@@ -2,6 +2,14 @@
 
 A nodejs framework on the top of express for making apis and web base software too. slowly evolving technology. Noddy is meant for those developers who wants to get rid of scratch code and want handled every side thing by software and just want to develop backend.
 
+## Installation
+
+Run Following Command
+
+```bash
+$ npx @deepeshgupta/noddy app_name
+```
+
 ## To Run in Docker
 
 Create a file in _./env/mongo.env_ and copy paste following :-
