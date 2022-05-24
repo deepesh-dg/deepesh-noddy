@@ -20,7 +20,7 @@ const run = () => {
         // authSalt: process.env.AUTH_SALT ?? "Noddy",
         timezone: process.env.TZ ?? "Europe/London",
         app: {
-            name: "@deepesh/noddy",
+            name: "@deepeshgupta/noddy",
             developedBy: "Deepesh Gupta",
             social: "https://www.twitter.com/deepeshdg_/",
             version: 0.3,
