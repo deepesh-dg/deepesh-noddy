@@ -21,7 +21,7 @@ services:
     env_file:
       - ./env/noddy.env
     ports:
-      - "3000:3000"
+      - "5500:5500"
     volumes:
       - ./:/app
       - /app/node_modules

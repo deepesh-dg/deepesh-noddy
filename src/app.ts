@@ -5,6 +5,7 @@ import createHttpError from "http-errors";
 import { AppRouter } from "./core/router";
 import { httpStatusCodes } from "./core/prototypes/enums/httpStatusCodes";
 import { ErrorFlag } from "./core/prototypes/type/Error";
+import response from "./core/middlewares/response";
 
 const debug: Logger = new Logger({ moduleName: "core:root" });
 const app: Express = express();
@@ -33,9 +34,10 @@ debug.debug("Set 404 Page");
  * Error Handler
  */
 app.use((err: ErrorFlag, req: Request, res: Response, next: NextFunction) => {
-    res.status(err.status || httpStatusCodes.INTERNAL_SERVER_ERROR)
-        .header(err.headers)
-        .send(err.body);
+    res.locals = {
+        sendApi: err,
+    };
+    response(req, res, next);
 });
 
 debug.debug("Handling Request Error");
