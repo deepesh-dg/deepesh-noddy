@@ -53,7 +53,7 @@ $ docker-compose up -d --build
 
 ## To Run Locally
 
-Create _./.env_ at the root of your site and copy and paste following :-
+Create _./.env_ at the root of your project and copy and paste following :-
 
 ```
 # Mongo DB
