@@ -1,6 +1,6 @@
 import { Router } from "../../core/router/Router";
 import { Welcome } from "../controllers/Welcome";
-import { WelcomeId } from "../controllers/WelcomeId";
+import { WelcomeId } from "../controllers/Welcome[id]";
 
 const router: Router = new Router();
 

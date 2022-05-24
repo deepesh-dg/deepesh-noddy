@@ -50,10 +50,18 @@ export class ResponseApi {
     }
 
     public static fake(
-        status: httpStatusCodes = httpStatusCodes.OK,
-        headers: { [key: string]: string | string[] } = {},
-        body: any = {}
+        {
+            status,
+            headers,
+            body,
+        }: {
+            status: httpStatusCodes;
+            headers?: { [key: string]: string | string[] };
+            body?: any;
+        } = { status: httpStatusCodes.OK, headers: {}, body: {} }
     ) {
+        if (status === undefined) status = httpStatusCodes.OK;
+        if (headers === undefined) headers = {};
         const response: SuccessFlag = {
             status,
             headers,

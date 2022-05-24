@@ -1,7 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import { httpStatusCodes } from "../../core/prototypes/enums/httpStatusCodes";
 import { Controller } from "../../core/controllers/Controller";
-import { SuccessFlag } from "../../core/prototypes/type/Success";
 import { Logger } from "../../core/lib/Log/Logger";
 import { Config } from "../../core/conf/Config";
 
@@ -23,65 +22,75 @@ export class Welcome extends Controller {
     }
 
     public get(req: Request, res: Response, next: NextFunction) {
-        const response: SuccessFlag = {
-            status: httpStatusCodes.OK,
-            headers: {},
-            body: {
-                ...this.appInfo,
+        res.locals = {
+            sendApi: {
+                status: httpStatusCodes.OK,
+                headers: {},
+                body: {
+                    ...this.appInfo,
+                },
             },
         };
 
-        next(response);
+        next();
     }
 
     public post(req: Request, res: Response, next: NextFunction) {
-        const response: SuccessFlag = {
-            status: httpStatusCodes.OK,
-            headers: {},
-            body: {
-                ...req.body,
-                ...this.appInfo,
+        res.locals = {
+            sendApi: {
+                status: httpStatusCodes.OK,
+                headers: {},
+                body: {
+                    ...req.body,
+                    ...this.appInfo,
+                },
             },
         };
 
-        next(response);
+        next();
     }
 
     public patch(req: Request, res: Response, next: NextFunction) {
-        const response: SuccessFlag = {
-            status: httpStatusCodes.OK,
-            headers: {},
-            body: {
-                ...req.body,
-                ...this.appInfo,
+        res.locals = {
+            sendApi: {
+                status: httpStatusCodes.OK,
+                headers: {},
+                body: {
+                    ...req.body,
+                    ...this.appInfo,
+                },
             },
         };
 
-        next(response);
+        next();
     }
 
     public put(req: Request, res: Response, next: NextFunction) {
-        const response: SuccessFlag = {
-            status: httpStatusCodes.OK,
-            headers: {},
-            body: {
-                ...req.body,
-                ...this.appInfo,
+        res.locals = {
+            sendApi: {
+                status: httpStatusCodes.OK,
+                headers: {},
+                body: {
+                    ...req.body,
+                    ...this.appInfo,
+                },
             },
         };
 
-        next(response);
+        next();
     }
 
     public delete(req: Request, res: Response, next: NextFunction) {
-        const response: SuccessFlag = {
-            status: httpStatusCodes.OK,
-            headers: {},
-            body: {
-                ...this.appInfo,
+        res.locals = {
+            sendApi: {
+                status: httpStatusCodes.OK,
+                headers: {},
+                body: {
+                    ...this.appInfo,
+                },
             },
         };
 
-        next(response);
+        next();
     }
 }
