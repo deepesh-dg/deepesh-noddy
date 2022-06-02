@@ -25,4 +25,4 @@ env/
 *.env
 
 # src Files
-./src
+src/

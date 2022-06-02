@@ -1,7 +1,7 @@
 {
     "name": "@deepeshgupta/noddy",
-    "version": "0.6.0",
-    "description": "noddy framework for backend api",
+    "version": "0.6.2",
+    "description": "A nodejs framework on the top of express for building apis and web base software too. slowly evolving technology. Noddy is meant for those developers who wants to get rid of scratch code and want handled every side thing by software and just want to develop backend.",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
     "scripts": {
@@ -11,12 +11,24 @@
         "build": "npm-run-all clean lint tsc",
         "start": "node .",
         "start:dev": "npm-run-all build start",
-        "dev": "nodemon --watch src -e ts,mts --exec npm run start:dev",
-        "test": "jest"
+        "dev": "nodemon --watch src -e ts,mts --exec npm run start:dev"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/PrinceDeepu/deepesh-noddy.git"
     },
     "keywords": [
-        "noddy"
+        "deepesh",
+        "noddy",
+        "deepeshgupta/noddy",
+        "noddyframework",
+        "node-framework",
+        "deepeshgupta"
     ],
+    "bugs": {
+        "url": "https://github.com/PrinceDeepu/deepesh-noddy/issues"
+    },
+    "homepage": "https://github.com/PrinceDeepu/deepesh-noddy#readme",
     "author": "Deepesh Gupta",
     "license": "MIT",
     "engines": {
