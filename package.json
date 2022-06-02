@@ -1,6 +1,6 @@
 {
     "name": "@deepeshgupta/noddy",
-    "version": "0.6.3",
+    "version": "0.6.31",
     "description": "A nodejs framework on the top of express for building apis and web base software too. slowly evolving technology. Noddy is meant for those developers who wants to get rid of scratch code and want handled every side thing by software and just want to develop backend.",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
@@ -11,7 +11,11 @@
         "build": "npm-run-all clean lint tsc",
         "start": "node .",
         "start:dev": "npm-run-all build start",
-        "dev": "nodemon --watch src -e ts,mts --exec npm run start:dev"
+        "dev": "nodemon --watch src -e ts,mts --exec npm run start:dev",
+        "prepublish": "npm-run-all build",
+        "publish": "npm publish --access-public",
+        "postpublish": "npm-run-all clean",
+        "publisher": "npm-run-all prepublish publish postpublish"
     },
     "repository": {
         "type": "git",
