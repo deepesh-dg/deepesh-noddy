@@ -6,7 +6,7 @@ services:
     ports:
       - "27017:27017"
     env_file:
-      - ./env/mongo.env
+      - ./.env
     volumes:
       - noddy-data:/data/db
 
@@ -19,7 +19,7 @@ services:
     depends_on:
       - mongo
     env_file:
-      - ./env/noddy.env
+      - ./.env
     ports:
       - "5500:5500"
     volumes:

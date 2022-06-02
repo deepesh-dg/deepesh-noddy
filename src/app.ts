@@ -1,45 +1,50 @@
-import { Logger } from "./core/lib/Log/Logger";
-import express, { NextFunction, Request, Response, Express } from "express";
-import { middlewares } from "./core/middlewares/app";
+import express, { Express, Request, Response, NextFunction } from "express";
+import { startServer } from "./bin/www";
+import { Logger } from "./lib/Log/Logger";
+import { middlewares } from "./middlewares/app";
 import createHttpError from "http-errors";
-import { AppRouter } from "./core/router";
-import { httpStatusCodes } from "./core/prototypes/enums/httpStatusCodes";
-import { ErrorFlag } from "./core/prototypes/type/Error";
-import response from "./core/middlewares/response";
+import { ErrorFlag } from "./prototypes/type/Error";
+import response from "./middlewares/response";
+import { AppRouter } from "./router/index";
 
-const debug: Logger = new Logger({ moduleName: "core:root" });
-const app: Express = express();
+export const bootstrap = async () => {
+    const app: Express = express();
+    const debug: Logger = new Logger({ moduleName: "noddy:root" });
 
-/**
- * Configure Global Middleware
- */
-middlewares(app);
-debug.debug("App Middleware Completed");
+    /**
+     * Configure Global Middleware
+     */
+    middlewares(app);
+    debug.debug("App Middleware Completed");
 
-/**
- * define a route handlers
- */
-app.use(AppRouter.get());
-debug.debug("All Routes Set");
+    /**
+     * define a route handlers
+     */
+    app.use(await AppRouter.get());
+    debug.debug("All Routes Set");
 
-/**
- * Catch 404 and forward to ErroR Handler
- */
-app.use((req: Request, res: Response, next: NextFunction) => {
-    next(createHttpError(404));
-});
-debug.debug("Set 404 Page");
+    /**
+     * Catch 404 and forward to ErroR Handler
+     */
+    app.use((req: Request, res: Response, next: NextFunction) => {
+        next(createHttpError(404));
+    });
+    debug.debug("Set 404 Page");
 
-/**
- * Error Handler
- */
-app.use((err: ErrorFlag, req: Request, res: Response, next: NextFunction) => {
-    res.locals = {
-        sendApi: err,
-    };
-    response(req, res, next);
-});
+    /**
+     * Error Handler
+     */
+    app.use(
+        (err: ErrorFlag, req: Request, res: Response, next: NextFunction) => {
+            res.locals = {
+                sendApi: err,
+            };
+            response(req, res, next);
+        }
+    );
 
-debug.debug("Handling Request Error");
+    debug.debug("Handling Request Error");
+    await startServer(app);
+};
 
-export default app;
+export default bootstrap;
