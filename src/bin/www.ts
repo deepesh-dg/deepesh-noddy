@@ -3,11 +3,9 @@ import { Express } from "express";
 import { Config } from "../conf/Config";
 import { createServer, Server } from "http";
 import { onError, onListening } from "../events/app";
-import bootup from "../start/start";
 
 export const startServer = async (app: Express) => {
     const debug: Logger = new Logger({ moduleName: "noddy:www" });
-    await bootup();
 
     /**
      * Set port from environment and store in Express.

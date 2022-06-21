@@ -18,7 +18,7 @@ export class AutoLoadConfig {
     }
 
     public static async run() {
-        if (this.autoLoad.mail) Mail.conn();
-        if (this.autoLoad.db) Database.conn();
+        if (this.autoLoad.mail) await Mail.conn();
+        if (this.autoLoad.db) await Database.conn();
     }
 }

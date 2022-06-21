@@ -7,7 +7,7 @@ const run = async () => {
     const appAutoLoad = await import(resolve(setting.path.conf.autoLoad));
     appAutoLoad.default();
 
-    AutoLoadConfig.run();
+    await AutoLoadConfig.run();
 };
 
 export default run;

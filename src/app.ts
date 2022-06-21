@@ -6,15 +6,21 @@ import createHttpError from "http-errors";
 import { ErrorFlag } from "./prototypes/type/Error";
 import response from "./middlewares/response";
 import { AppRouter } from "./router/index";
+import bootup from "./start/start";
 
 export const bootstrap = async () => {
     const app: Express = express();
     const debug: Logger = new Logger({ moduleName: "noddy:root" });
 
     /**
+     * starting bootup file for loading application
+     */
+    await bootup();
+
+    /**
      * Configure Global Middleware
      */
-    middlewares(app);
+    await middlewares(app);
     debug.debug("App Middleware Completed");
 
     /**
@@ -36,9 +42,7 @@ export const bootstrap = async () => {
      */
     app.use(
         (err: ErrorFlag, req: Request, res: Response, next: NextFunction) => {
-            res.locals = {
-                sendApi: err,
-            };
+            res.locals.sendApi = err;
             response(req, res, next);
         }
     );
