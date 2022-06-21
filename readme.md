@@ -7,7 +7,7 @@ A nodejs framework on the top of express for building apis and web base software
 Run Following Command
 
 ```bash
-$ npx @deepeshgupta/noddy-client app_name
+$ npx @deepeshgupta/noddy-proj app_name
 ```
 
 ## Configuration
@@ -34,6 +34,7 @@ MAIL_NAME="Noddy"
 MAIL_EMAILID="mail@example.com"
 MAIL_USERNAME="mail@example.com"
 MAIL_PASSWORD="password"
+MAIL_SECURE="on"
 ```
 
 run below command for docker
