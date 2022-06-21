@@ -29,7 +29,7 @@ export class Mail {
         else {
             this._mailConfig.host = MailConfig.get("host");
             this._mailConfig.port = MailConfig.get("port");
-            this._mailConfig.secure = false;
+            this._mailConfig.secure = MailConfig.get("secure");
         }
         this._transporter = createTransport(this._mailConfig);
     }

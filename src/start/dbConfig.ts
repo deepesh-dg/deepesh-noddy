@@ -10,7 +10,7 @@ const run = async () => {
         mongodbUrl: process.env.MONGODB_AUTH_URL ?? "",
     });
 
-    appDbConfig.default();
+    await appDbConfig.default();
 };
 
 export default run;

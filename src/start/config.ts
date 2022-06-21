@@ -32,7 +32,7 @@ const run = async () => {
     };
 
     Config.setAll(config);
-    appConfig.default();
+    await appConfig.default();
 };
 
 export default run;
