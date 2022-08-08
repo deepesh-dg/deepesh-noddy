@@ -27,3 +27,9 @@ env/
 # src Files
 src/
 test/
+tsconfig.json
+
+# docker
+Dockerfile
+docker-compose.yml
+.dockerignore

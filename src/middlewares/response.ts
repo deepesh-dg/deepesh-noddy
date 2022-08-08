@@ -19,7 +19,7 @@ export const response = (req: Request, res: Response, next: NextFunction) => {
             Date.now() - res.locals.meta.reqStartTimer
         }ms`
     );
-    res.status(status).header(headers).send({ status, body });
+    res.status(status).header(headers).send(body);
 
     return;
 };
