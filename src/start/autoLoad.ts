@@ -1,11 +1,8 @@
 import { AutoLoadConfig } from "../conf/AutoLoad";
-import { appSettings } from "../lib/AppSettings/AppSettings";
-import { resolve } from "path";
+import { app } from "../lib/AppSettings/LoadAppSettings";
 
 const run = async () => {
-    const setting = appSettings();
-    const appAutoLoad = await import(resolve(setting.path.conf.autoLoad));
-    await appAutoLoad.default();
+    await app.conf.autoLoad();
 
     await AutoLoadConfig.run();
 };

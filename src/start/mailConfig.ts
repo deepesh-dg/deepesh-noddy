@@ -1,27 +1,22 @@
+import { normalizePort } from "../helpers/port/normalizePort";
 import { MailConfig } from "../conf/Mail";
-import { appSettings } from "../lib/AppSettings/AppSettings";
-import { resolve } from "path";
+import { app } from "../lib/AppSettings/LoadAppSettings";
 
 const run = async () => {
-    const setting = appSettings();
-    const appMailConfig = await import(resolve(setting.path.conf.mail));
+    const accept = ["on", "true", "yes"];
 
     MailConfig.setAll({
         service: process.env.MAIL_SERVICE ?? "",
         host: process.env.MAIL_HOST ?? "",
-        port: process.env.MAIL_PORT ? Number(process.env.MAIL_PORT) : 587,
+        port: normalizePort(Number(process.env.MAIL_PORT) || 587),
         name: process.env.MAIL_NAME ?? "",
         emailid: process.env.MAIL_EMAILID ?? "",
         user: process.env.MAIL_USERNAME ?? "",
         password: process.env.MAIL_PASSWORD ?? "",
-        secure:
-            process.env.MAIL_SECURE === "on" ||
-            process.env.MAIL_SECURE === "true"
-                ? true
-                : false,
+        secure: accept.includes(process.env.MAIL_SECURE || ""),
     });
 
-    await appMailConfig.default();
+    await app.conf.mail();
 };
 
 export default run;

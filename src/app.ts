@@ -7,10 +7,16 @@ import { ErrorFlag } from "./prototypes/type/Error";
 import response from "./middlewares/response";
 import { AppRouter } from "./router/index";
 import bootup from "./start/start";
+import LoadAppSettings from "./lib/AppSettings/LoadAppSettings";
 
 export const bootstrap = async () => {
     const app: Express = express();
     const debug: Logger = new Logger({ moduleName: "noddy:root" });
+
+    /**
+     * Loading App Setting Fils
+     */
+    await LoadAppSettings();
 
     /**
      * starting bootup file for loading application
@@ -35,7 +41,7 @@ export const bootstrap = async () => {
     app.use((req: Request, res: Response, next: NextFunction) => {
         next(createHttpError(404));
     });
-    debug.debug("Set 404 Page");
+    debug.debug("Set 404 Response");
 
     /**
      * Error Handler
@@ -49,6 +55,8 @@ export const bootstrap = async () => {
 
     debug.debug("Handling Request Error");
     await startServer(app);
+
+    return true;
 };
 
 export default bootstrap;

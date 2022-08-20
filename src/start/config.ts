@@ -1,38 +1,44 @@
 import { Config } from "../conf/Config";
-import { normalizePort } from "../lib/Others/normalizePort";
+import { normalizePort } from "../helpers/port/normalizePort";
 import dotenv from "dotenv";
-import { appSettings } from "../lib/AppSettings/AppSettings";
-import { resolve } from "path";
+import { app } from "../lib/AppSettings/LoadAppSettings";
+import appVersion from "../helpers/appVersion";
+import { isDev } from "../helpers/env";
 
 const run = async () => {
-    const setting = appSettings();
-    const appConfig = await import(resolve(setting.path.conf.conf));
+    /*
+     * Setting Environment
+     */
+    Config.set(
+        "production",
+        process.env.NODE_ENV === "development" ? false : true
+    );
 
-    if (!Config.get("production")) dotenv.config();
+    /**
+     * Loading .env file for development env
+     */
+    if (isDev()) dotenv.config();
+
+    /**
+     * Setting up Rest Config
+     */
     const config: { [key: string]: any } = {
         https:
             process.env.HTTPS === "on" || process.env.HTTPS === "true"
                 ? true
                 : false,
-        http2:
-            process.env.HTTP2 === "on" || process.env.HTTP2 === "true"
-                ? true
-                : false,
-        production: process.env.NODE_ENV === "development" ? false : true,
-        port: normalizePort(Number(process.env.PORT) || 5500),
-        // authKey: process.env.AUTH_KEY ?? "Noddy",
-        // authSalt: process.env.AUTH_SALT ?? "Noddy",
+        port: normalizePort(Number(process.env.PORT)) || 5500,
         timezone: process.env.TZ ?? "Europe/London",
         app: {
             name: "@deepeshgupta/noddy",
             developedBy: "Deepesh Gupta",
             social: "https://www.twitter.com/deepeshdg_/",
-            version: 0.3,
+            version: appVersion(),
         },
     };
 
     Config.setAll(config);
-    await appConfig.default();
+    await app.conf.conf();
 };
 
 export default run;

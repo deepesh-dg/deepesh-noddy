@@ -5,7 +5,7 @@ import { promiseHandle } from "../../lib/PromiseHandler/PromiseHandler";
 export class MongoDB {
     public static async conn() {
         const result = await promiseHandle(
-            mongoose.connect(DBConfig.get("mongodbUrl"))
+            mongoose.connect(DBConfig.get("url"))
         );
 
         return result;

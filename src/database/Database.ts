@@ -8,9 +8,7 @@ export class Database {
         const result = await MongoDB.conn();
 
         result
-            .map((success) =>
-                debug.debug("Successfully Connected To The Database...")
-            )
-            .mapErr((error) => debug.debug("Database Connection Failed..."));
+            .map(() => debug.debug("Successfully Connected To The Database..."))
+            .mapErr(() => debug.debug("Database Connection Failed..."));
     }
 }

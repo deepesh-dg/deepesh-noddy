@@ -4,9 +4,9 @@ import config from "./config";
 import mailConfig from "./mailConfig";
 import autoLoad from "./autoLoad";
 
-const debug = new Logger({ moduleName: "noddy:start" });
-
 const run = async () => {
+    const debug = new Logger({ moduleName: "noddy:start" });
+
     await config();
     await mailConfig();
     await dbConfig();

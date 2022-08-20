@@ -1,7 +1,7 @@
 import Debug, { Debugger } from "debug";
 import fs from "fs";
 import { resolve } from "path";
-import { appSettings } from "../AppSettings/AppSettings";
+import { app } from "../AppSettings/LoadAppSettings";
 
 export enum LogLevels {
     EMERGENCY = 1,
@@ -54,12 +54,11 @@ export class Logger {
             case "logFile":
                 {
                     const time = new Date();
-                    const settings = appSettings();
                     message =
                         "\n" + time + " <-----> " + JSON.stringify(message);
 
                     fs.appendFile(
-                        `${resolve(settings.path.app)}/${time
+                        `${resolve(app.app)}/${time
                             .toJSON()
                             .slice(0, 10)
                             .replace(/-/g, "_")}.log`,

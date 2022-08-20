@@ -1,16 +1,12 @@
-import { appSettings } from "../lib/AppSettings/AppSettings";
+import { app } from "../lib/AppSettings/LoadAppSettings";
 import { DBConfig } from "../conf/DB";
-import { resolve } from "path";
 
 const run = async () => {
-    const setting = appSettings();
-    const appDbConfig = await import(resolve(setting.path.conf.db));
-
     DBConfig.setAll({
-        mongodbUrl: process.env.MONGODB_AUTH_URL ?? "",
+        url: process.env.MONGODB_AUTH_URL ?? "",
     });
 
-    await appDbConfig.default();
+    await app.conf.db();
 };
 
 export default run;

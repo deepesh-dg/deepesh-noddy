@@ -1,6 +1,5 @@
 import { Router } from "express";
-import { appSettings } from "../lib/AppSettings/AppSettings";
-import { resolve } from "path";
+import { app } from "../lib/AppSettings/LoadAppSettings";
 import { Logger } from "../lib/Log/Logger";
 
 export class AppRouter {
@@ -9,11 +8,12 @@ export class AppRouter {
         moduleName: "noddy:root:index",
     });
 
-    public static async get(): Promise<Router> {
-        const settings = appSettings();
-        const appRouter = await import(resolve(settings.path.routes));
+    private static set(): void {
+        this._router = app.routes.getRoutes();
+    }
 
-        this._router = appRouter.default.getRoutes();
+    public static async get(): Promise<Router> {
+        this.set();
         return this._router;
     }
 }
