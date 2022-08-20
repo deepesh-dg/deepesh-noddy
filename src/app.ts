@@ -48,7 +48,7 @@ export const bootstrap = async () => {
      */
     app.use(
         (err: ErrorFlag, req: Request, res: Response, next: NextFunction) => {
-            res.locals.sendApi = err;
+            res.locals.api = err;
             finalResponse(req, res, next);
         }
     );
