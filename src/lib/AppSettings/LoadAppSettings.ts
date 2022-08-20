@@ -6,7 +6,7 @@ import { Router } from "../../router/Router";
 
 type App = {
     app: string;
-    routes: Router;
+    routes: () => Router;
     middleware: (app: Express) => Promise<Express | void>;
     conf: {
         conf: () => Promise<void>;

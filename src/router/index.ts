@@ -9,7 +9,7 @@ export class AppRouter {
     });
 
     private static set(): void {
-        this._router = app.routes.getRoutes();
+        this._router = app.routes().getRoutes();
     }
 
     public static async get(): Promise<Router> {
