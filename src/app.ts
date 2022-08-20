@@ -4,7 +4,7 @@ import { Logger } from "./lib/Log/Logger";
 import { middlewares } from "./middlewares/app";
 import createHttpError from "http-errors";
 import { ErrorFlag } from "./prototypes/type/Error";
-import response from "./middlewares/response";
+import finalResponse from "./middlewares/finalResponse";
 import { AppRouter } from "./router/index";
 import bootup from "./start/start";
 import LoadAppSettings from "./lib/AppSettings/LoadAppSettings";
@@ -49,7 +49,7 @@ export const bootstrap = async () => {
     app.use(
         (err: ErrorFlag, req: Request, res: Response, next: NextFunction) => {
             res.locals.sendApi = err;
-            response(req, res, next);
+            finalResponse(req, res, next);
         }
     );
 

@@ -3,7 +3,8 @@ import { safeRoute } from "../lib/RouterErrorHandler/RouterErrorHandler";
 import { Logger } from "../lib/Log/Logger";
 import { Controller } from "../controllers/Controller";
 import _ from "lodash";
-import response from "../middlewares/response";
+import { finalResponse } from "../middlewares/finalResponse";
+import { setResponse } from "../middlewares/setResponse";
 
 type THandler = (req: Request, res: Response, next: NextFunction) => void;
 
@@ -133,33 +134,38 @@ export class Router {
 
             this._router.get(
                 path,
+                setResponse,
                 ...localApiMiddlewares.get,
                 this.linkControllerToRouter(ControllerClass, "get"),
-                response
+                finalResponse
             );
             this._router.post(
                 path,
+                setResponse,
                 ...localApiMiddlewares.post,
                 this.linkControllerToRouter(ControllerClass, "post"),
-                response
+                finalResponse
             );
             this._router.put(
                 path,
+                setResponse,
                 ...localApiMiddlewares.put,
                 this.linkControllerToRouter(ControllerClass, "put"),
-                response
+                finalResponse
             );
             this._router.patch(
                 path,
+                setResponse,
                 ...localApiMiddlewares.patch,
                 this.linkControllerToRouter(ControllerClass, "patch"),
-                response
+                finalResponse
             );
             this._router.delete(
                 path,
+                setResponse,
                 ...localApiMiddlewares.delete,
                 this.linkControllerToRouter(ControllerClass, "delete"),
-                response
+                finalResponse
             );
 
             return;
@@ -171,7 +177,7 @@ export class Router {
     public get(config: IRouterApiOptions): Router {
         const { path, handlers } = this.handleApiMethods(config);
 
-        this._router.get(path, ...handlers, response);
+        this._router.get(path, setResponse, ...handlers, finalResponse);
 
         return this;
     }
@@ -179,7 +185,7 @@ export class Router {
     public post(config: IRouterApiOptions): Router {
         const { path, handlers } = this.handleApiMethods(config);
 
-        this._router.post(path, ...handlers, response);
+        this._router.post(path, setResponse, ...handlers, finalResponse);
 
         return this;
     }
@@ -187,7 +193,7 @@ export class Router {
     public put(config: IRouterApiOptions): Router {
         const { path, handlers } = this.handleApiMethods(config);
 
-        this._router.put(path, ...handlers, response);
+        this._router.put(path, setResponse, ...handlers, finalResponse);
 
         return this;
     }
@@ -195,7 +201,7 @@ export class Router {
     public patch(config: IRouterApiOptions): Router {
         const { path, handlers } = this.handleApiMethods(config);
 
-        this._router.patch(path, ...handlers, response);
+        this._router.patch(path, setResponse, ...handlers, finalResponse);
 
         return this;
     }
@@ -203,7 +209,7 @@ export class Router {
     public delete(config: IRouterApiOptions): Router {
         const { path, handlers } = this.handleApiMethods(config);
 
-        this._router.delete(path, ...handlers, response);
+        this._router.delete(path, setResponse, ...handlers, finalResponse);
 
         return this;
     }
