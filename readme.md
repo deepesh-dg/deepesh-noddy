@@ -16,7 +16,7 @@ Create _./.env_ at the root of your project and copy and paste following :-
 
 ```
 # Mongo DB
-MONGODB_AUTH_URL="mongodb://mongo:27017/db_name"
+MONGODB_AUTH_URL="mongodb://mongo:27017/"
 
 # Node Env
 NODE_ENV='development'
@@ -53,7 +53,7 @@ $ npm run dev
 
 ---
 
-## ![Deepesh Gupta](https://rewards.brave.com/vhq0pr1kd2jpv78gi1b802q8g330)
+## ![Deepesh Gupta](https://res.cloudinary.com/deepeshgupta/image/upload/v1657209567/deepeshgupta/facebook_cover_tsvhy3.png)
 
 Developed By - _Deepesh Gupta_
 
