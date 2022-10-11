@@ -1,9 +1,10 @@
 import { Config } from "../conf/Config";
 import { normalizePort } from "../helpers/port/normalizePort";
 import dotenv from "dotenv";
-import { app } from "../lib/AppSettings/LoadAppSettings";
 import appVersion from "../helpers/appVersion";
 import { isDev } from "../helpers/env";
+import { appSettings } from "../lib/AppSettings/appSettings";
+import { resolve } from "path";
 
 const run = async () => {
     /*
@@ -38,7 +39,13 @@ const run = async () => {
     };
 
     Config.setAll(config);
-    await app.conf.conf();
+
+    const setting = appSettings();
+    const conf = (
+        await import(resolve(setting.path.app, setting.path.conf.conf))
+    ).default;
+
+    await conf();
 };
 
 export default run;

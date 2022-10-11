@@ -1,6 +1,7 @@
 import { normalizePort } from "../helpers/port/normalizePort";
 import { MailConfig } from "../conf/Mail";
-import { app } from "../lib/AppSettings/LoadAppSettings";
+import { appSettings } from "../lib/AppSettings/appSettings";
+import { resolve } from "path";
 
 const run = async () => {
     const accept = ["on", "true", "yes"];
@@ -16,7 +17,12 @@ const run = async () => {
         secure: accept.includes(process.env.MAIL_SECURE || ""),
     });
 
-    await app.conf.mail();
+    const setting = appSettings();
+    const mail = (
+        await import(resolve(setting.path.app, setting.path.conf.mail))
+    ).default;
+
+    await mail();
 };
 
 export default run;

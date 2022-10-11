@@ -5,7 +5,7 @@ import { createServer, Server } from "http";
 import { onError, onListening } from "../events/app";
 
 export const startServer = async (app: Express) => {
-    const debug: Logger = new Logger({ moduleName: "noddy:www" });
+    const debug: Logger = new Logger({ moduleName: "noddy:www", type: "log" });
 
     /**
      * Set port from environment and store in Express.

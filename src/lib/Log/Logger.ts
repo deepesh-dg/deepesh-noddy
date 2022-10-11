@@ -1,90 +1,71 @@
-import Debug, { Debugger } from "debug";
-import fs from "fs";
-import { resolve } from "path";
-import { app } from "../AppSettings/LoadAppSettings";
+import debug, { Debugger } from "debug";
+import { FileHandler } from "./Handlers/FileHandler";
 
 export enum LogLevels {
     EMERGENCY = 1,
-    ALERT,
-    CRITICAL,
     ERROR,
     WARNING,
-    NOTICE,
-    INFO,
     DEBUG,
 }
 
-export type LogConfig = {
-    type?: "database" | "logFile" | "console";
+export type Config = {
+    type: "db" | "file" | "log";
     moduleName: string;
 };
 
 export class Logger {
     private _debug: Debugger;
-    private _config: LogConfig;
+    private config: Config;
+    private msgs: any[] = [];
 
-    constructor(config: LogConfig) {
-        this._config = config;
-        this._debug = Debug(config.moduleName);
-
-        // switch (config.type) {
-        //     case "console":
-        //         {}
-        //         break;
-        //     case "database":
-        //         {}
-        //         break;
-        //     case "logFile":
-        //         {}
-        //         break;
-        //     default:
-        //         break;
-        // }
+    constructor(config: Config) {
+        this.config = config;
+        this._debug = debug(this.config.moduleName);
     }
 
-    public log(level: LogLevels, ...messages: any[]) {
-        let message: any = messages.slice(1);
-
-        switch (this._config.type) {
-            case "console":
-                {
-                    this._debug(messages[0], ...message);
-                }
-                break;
-            case "logFile":
-                {
-                    const time = new Date();
-                    message =
-                        "\n" + time + " <-----> " + JSON.stringify(message);
-
-                    fs.appendFile(
-                        `${resolve(app.app)}/${time
-                            .toJSON()
-                            .slice(0, 10)
-                            .replace(/-/g, "_")}.log`,
-                        message,
-                        "utf8",
-                        (err) => {
-                            if (err) throw err;
-                        }
-                    );
-                }
-                break;
-            default:
-                break;
-        }
+    private _log() {
+        this._debug(this.msgs[0], ...this.msgs.slice(1));
     }
 
-    public debug(...message: any[]) {
-        this._config.type = "console";
-        this.log(LogLevels.DEBUG, ...message);
+    private _file() {
+        const fileHandler = new FileHandler(this.msgs);
+        fileHandler.write();
     }
 
-    public static debug(...message: any[]) {
-        const logObj = new Logger({
-            type: "console",
-            moduleName: "noddy:Logger",
-        });
-        logObj.debug(...message);
+    private _db() {
+        return undefined;
+    }
+
+    public log(level: LogLevels, ...msgs: any[]) {
+        this.msgs = msgs;
+
+        const handle = () => {
+            if (this.config.type === "log") this._log();
+            else if (this.config.type === "file") this._file();
+            else if (this.config.type === "db") this._db();
+        };
+
+        if (level === LogLevels.DEBUG) this.msgs.splice(0, 0, "DEBUG");
+        if (level === LogLevels.WARNING) this.msgs.splice(0, 0, "WARNING");
+        if (level === LogLevels.ERROR) this.msgs.splice(0, 0, "ERROR");
+        if (level === LogLevels.EMERGENCY) this.msgs.splice(0, 0, "EMERGENCY");
+
+        handle();
+    }
+
+    public debug(...msgs: any[]) {
+        this.log(LogLevels.DEBUG, ...msgs);
+    }
+
+    public warning(...msgs: any[]) {
+        this.log(LogLevels.WARNING, ...msgs);
+    }
+
+    public error(...msgs: any[]) {
+        this.log(LogLevels.ERROR, ...msgs);
+    }
+
+    public emergency(...msgs: any[]) {
+        this.log(LogLevels.EMERGENCY, ...msgs);
     }
 }

@@ -4,9 +4,13 @@ import { unhandledErrors } from "../events/unhandledErrors";
 import cookieParser from "cookie-parser";
 import helmet from "helmet";
 import httpLogger from "./httpLogger";
-import { app as appFile } from "../lib/AppSettings/LoadAppSettings";
+import { resolve } from "path";
+import { appSettings } from "../lib/AppSettings/appSettings";
 
-const debug: Logger = new Logger({ moduleName: "noddy:middlewares" });
+const debug: Logger = new Logger({
+    moduleName: "noddy:middlewares",
+    type: "log",
+});
 
 export const middlewares = async (app: Express): Promise<Express> => {
     /**
@@ -39,7 +43,11 @@ export const middlewares = async (app: Express): Promise<Express> => {
     /**
      * Custom Middleware
      */
-    const returnedApp = await appFile.middleware(app);
+    const setting = appSettings();
+    const middleware = (
+        await import(resolve(setting.path.app, setting.path.middleware))
+    ).default;
+    const returnedApp = await middleware(app);
 
     if (returnedApp) return returnedApp;
 

@@ -4,7 +4,9 @@ import { SuccessFlag } from "../../prototypes/type/Success";
 import { ErrorFlag } from "../../prototypes/type/Error";
 
 export class ResponseApi {
-    private static setHeaders<T>(headers: T): T {
+    private static setHeaders<T>(headers: { [key: string]: T }): {
+        [key: string]: T;
+    } {
         let allowHeaders = "";
 
         for (const headerKey in headers) {

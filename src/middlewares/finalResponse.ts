@@ -7,7 +7,7 @@ export const finalResponse = (
     res: Response,
     next: NextFunction
 ) => {
-    const debug = new Logger({ moduleName: "noddy:response" });
+    const debug = new Logger({ moduleName: "noddy:response", type: "log" });
     let status = httpStatusCodes.INTERNAL_SERVER_ERROR;
     let headers = {};
     let body = {};

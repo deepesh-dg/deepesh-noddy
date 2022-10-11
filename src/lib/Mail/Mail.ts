@@ -4,7 +4,7 @@ import { MailConfig } from "../../conf/Mail";
 import { Logger } from "../Log/Logger";
 import { promiseHandle } from "../PromiseHandler/PromiseHandler";
 
-const debug: Logger = new Logger({ moduleName: "noddy:lib:mail" });
+const debug: Logger = new Logger({ moduleName: "noddy:lib:mail", type: "log" });
 
 export interface IMailConfig {
     to: string;

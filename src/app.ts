@@ -7,16 +7,10 @@ import { ErrorFlag } from "./prototypes/type/Error";
 import finalResponse from "./middlewares/finalResponse";
 import { AppRouter } from "./router/index";
 import bootup from "./start/start";
-import LoadAppSettings from "./lib/AppSettings/LoadAppSettings";
 
 export const bootstrap = async () => {
     const app: Express = express();
-    const debug: Logger = new Logger({ moduleName: "noddy:root" });
-
-    /**
-     * Loading App Setting Fils
-     */
-    await LoadAppSettings();
+    const debug: Logger = new Logger({ moduleName: "noddy:root", type: "log" });
 
     /**
      * starting bootup file for loading application

@@ -1,6 +1,9 @@
 import { Logger } from "../lib/Log/Logger";
 
-const debug: Logger = new Logger({ moduleName: "noddy:unhandledErrors" });
+const debug: Logger = new Logger({
+    moduleName: "noddy:unhandledErrors",
+    type: "log",
+});
 
 export const unhandledErrors = () => {
     process.on("uncaughtException", (err: Error) => {

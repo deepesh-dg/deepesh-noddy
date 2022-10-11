@@ -1,7 +1,7 @@
 import { Logger } from "../lib/Log/Logger";
 import { MongoDB } from "./mongodb/MongoDB";
 
-const debug: Logger = new Logger({ moduleName: "noddy:database" });
+const debug: Logger = new Logger({ moduleName: "noddy:database", type: "log" });
 
 export class Database {
     public static async conn() {

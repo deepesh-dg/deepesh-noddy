@@ -5,7 +5,7 @@ import mailConfig from "./mailConfig";
 import autoLoad from "./autoLoad";
 
 const run = async () => {
-    const debug = new Logger({ moduleName: "noddy:start" });
+    const debug = new Logger({ moduleName: "noddy:start", type: "log" });
 
     await config();
     await mailConfig();

@@ -31,7 +31,10 @@ interface IRouterOptions {
 
 export class Router {
     private _router: ERouter;
-    private debug: Logger = new Logger({ moduleName: "noddy:routes" });
+    private debug: Logger = new Logger({
+        moduleName: "noddy:routes",
+        type: "log",
+    });
 
     constructor() {
         this._router = ERouter();
